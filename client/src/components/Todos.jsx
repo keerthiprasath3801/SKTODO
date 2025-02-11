@@ -19,7 +19,7 @@ const fetcher = (url, options = {}) =>
   }).then((res) => res.json()); // Call res.json() to parse the response
 
   const Todos = () => {
-    const { data, error, mutate, isLoading } = useSWR("http://localhost:3000/api/todos", fetcher);
+    const { data, error, mutate, isLoading } = useSWR("https://sktodo.onrender.com/api/todos", fetcher);
   
     if (error) {
       return <h1 className='text-2xl py-2 text-center'>Something went wrong!</h1>;
@@ -50,7 +50,7 @@ const fetcher = (url, options = {}) =>
       };
   
       async function addTodo() {
-        const response = await fetcher("http://localhost:3000/api/todos", {
+        const response = await fetcher("https://sktodo.onrender.com/api/todos", {
           method: "POST",
           body: { title },
         });
@@ -72,7 +72,7 @@ const fetcher = (url, options = {}) =>
     async function deleteTodo(id) {
       toast.success("Todo deleted!")
       await mutate(async() => {
-        const response = await fetcher(`http://localhost:3000/api/todos/${id}`,{
+        const response = await fetcher(`https://sktodo.onrender.com/api/todos/${id}`,{
           method:'DELETE',
         })
         if(response.error){
@@ -90,7 +90,7 @@ const fetcher = (url, options = {}) =>
     }
     async function handleComplete(id,isCompleted) {
       await mutate(async() =>{
-        const response = await fetcher(`http://localhost:3000/api/todos/${id}`,{
+        const response = await fetcher(`https://sktodo.onrender.com/api/todos/${id}`,{
           method:"PUT",
           body:{isCompleted : !isCompleted}
         })
@@ -120,7 +120,7 @@ const fetcher = (url, options = {}) =>
       const id=formData.get("id");
       console.log({title,id});
       await mutate(async() => {
-        const response = await fetcher(`http://localhost:3000/api/todos/${id}`,{
+        const response = await fetcher(`https://sktodo.onrender.com/api/todos/${id}`,{
           method:"PUT",
           body:{title}
         })
