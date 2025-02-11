@@ -12,7 +12,7 @@ const PORT =3000;
 dotenv.config();
 
 const corsOption ={
-    origin : "http://localhost:5173",
+    origin : origin : ["http://localhost:5173","https://sktodo.onrender.com/"],
     credentials : true,
 }
 
