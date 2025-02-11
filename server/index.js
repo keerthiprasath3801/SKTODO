@@ -12,8 +12,9 @@ const PORT =3000;
 dotenv.config();
 
 const corsOption ={
-  origin: ["http://localhost:5173", "https://sktodo.onrender.com", "https://sktodosapp.netlify.app"],
-  credentials: true,  // Allow cookies and auth headers
+  origin: ["http://localhost:5173", "https://sktodosapp.netlify.app"], // Allow frontend URLs
+  credentials: true, // Allow cookies & authentication headers
+  methods: ["GET", "POST", "PUT", "DELETE"],// Allow cookies and auth headers
 }
 
 
