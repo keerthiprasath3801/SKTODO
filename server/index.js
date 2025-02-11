@@ -15,7 +15,7 @@ const corsOptions= {
   origin: ["http://localhost:5173","https://sktodo.onrender.com","https://sktodosapp.netlify.app/"],// Allow the specific frontend domain
   credentials: true,
   methods: ["GET", "POST", "PUT", "DELETE"],
-  allowedHeaders: ["Content-Type"],
+  allowedHeaders: ["Content-Type", "Authorization"]
 };
 
 
