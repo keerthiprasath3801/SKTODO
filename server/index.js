@@ -7,7 +7,7 @@ import cookieParser from "cookie-parser";
 import cors from "cors"
 
 const app=express();
-const PORT ="https://sktodo.onrender.com";
+const PORT =3000;
 
 dotenv.config();
 
