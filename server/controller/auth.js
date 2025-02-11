@@ -22,21 +22,32 @@ export async function register(req, res, next){
 }
 
 export async function login(req, res, next){
-    const data=req.body;
+    const data = req.body;
     console.log(data);
     
-    if(!data?.email || !data?.password){
-        return next(createError(400,"Missing fields"))
+    if (!data?.email || !data?.password) {
+        return next(createError(400, "Missing fields"));
     }
+
     await connectToDB();
-    const user = await User.findOne({email:req.body.email })
-    if(!user) return next  (createError(400,"Invalid credentials  "));
-    const isPasswordCorrect = await bcrypt.compare(req.body.password,user.password );
-    if(!isPasswordCorrect) return next  (createError(400,"Invalid credentials  "));
-    const token = jwt.sign({id:user._id},process.env.JWT)
-    console.log(token)
-    res.cookie("access_token",token,{httpOnly: true,secure:process.env.Node_ENV === 'production',}).status(200).json("User logged in ")
+    const user = await User.findOne({ email: req.body.email });
+    if (!user) return next(createError(400, "Invalid credentials"));
+
+    const isPasswordCorrect = await bcrypt.compare(req.body.password, user.password);
+    if (!isPasswordCorrect) return next(createError(400, "Invalid credentials"));
+
+    const token = jwt.sign({ id: user._id }, process.env.JWT);
+    console.log("Generated Token:", token);
+
+    res.cookie("access_token", token, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',  // Ensure 'secure' is set properly
+        sameSite: "None",   // ✅ REQUIRED for cross-origin authentication
+    })
+    .status(200)
+    .json({ message: "User logged in", user: { id: user._id, email: user.email } });
 }
+
 
 export async function logout(req, res, next){
     res.clearCookie("access_token",{
