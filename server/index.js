@@ -15,7 +15,7 @@ const corsOption= {
   origin: ["https://sktodosapp.netlify.app","http://localhost:5173"], // Allow the specific frontend domain
   credentials: true, // Allow cookies and authentication headers
   methods: ["GET", "POST", "PUT", "DELETE"],
-  allowedHeaders: ["Content-Type"],
+  allowedHeaders: ["Content-Type","Authorization"],
 };
 
 app.use(cors(corsOption))
