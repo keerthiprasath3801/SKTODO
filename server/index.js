@@ -11,17 +11,16 @@ const PORT = process.env.PORT || 3000;
 
 dotenv.config();
 
-const corsOptions= {
-  origin: ["http://localhost:5173","https://sktodosapp.netlify.app"],// Allow the specific frontend domain
-  credentials: true,
+const corsOptions = {
+  origin: ["http://localhost:5173", "https://sktodosapp.netlify.app"], // Allowed frontends
+  credentials: true,  // ✅ Allow cookies to be sent
   methods: ["GET", "POST", "PUT", "DELETE"],
-  allowedHeaders: ["Content-Type", "Authorization","Cookie"]
+  allowedHeaders: ["Content-Type", "Authorization"]
 };
 
-
+app.use(cors(corsOptions));
 app.use(cookieParser());  // ✅ Parse cookies first
-app.use(bodyParser.json()); // ✅ Parse JSON body before using it
-app.use(cors(corsOptions)); // ✅ CORS should come after cookieParser
+app.use(bodyParser.json()); // ✅ Parse JSON body before using it// ✅ CORS should come after cookieParser
 app.use("/api/user", AuthRoute);
 app.use("/api/todos", TodoRoute);
 
