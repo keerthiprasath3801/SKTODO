@@ -11,13 +11,12 @@ const PORT =3000;
 
 dotenv.config();
 
-const corsOptions = {
+const corsOption= {
   origin: ["https://sktodosapp.netlify.app"], // Allow the specific frontend domain
   credentials: true, // Allow cookies and authentication headers
   methods: ["GET", "POST", "PUT", "DELETE"],
   allowedHeaders: ["Content-Type", "Authorization"],
 };
-
 
 app.use(cors(corsOption))
 app.use(bodyParser.json())
