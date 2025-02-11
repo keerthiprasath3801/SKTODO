@@ -19,11 +19,12 @@ const corsOptions= {
 };
 
 
-app.use(cors(corsOptions))
-app.use(bodyParser.json())
-app.use(cookieParser());
-app.use("/api/user",AuthRoute)
-app.use("/api/todos",TodoRoute)
+app.use(cookieParser());  // ✅ Parse cookies first
+app.use(bodyParser.json()); // ✅ Parse JSON body before using it
+app.use(cors(corsOptions)); // ✅ CORS should come after cookieParser
+app.use("/api/user", AuthRoute);
+app.use("/api/todos", TodoRoute);
+
 
 app.get("/",(req,res,next) => {
     res.send("helloworld");
